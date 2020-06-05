@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
-
+import 'dart:async';
 class PreviewScreen extends StatefulWidget{
   final String imgPath;
 
@@ -42,10 +42,9 @@ class _PreviewScreenState extends State<PreviewScreen>{
                   child: RaisedButton(
                       child: Text('Upload to Solitaire Logic'),
                       color: Colors.blue,
-                    onPressed: (){
-//                      getBytesFromFile().then((bytes){
-//                        Share.file('Share via', basename(widget.imgPath), bytes.buffer.asUint8List(),'image/path');
-//                      });
+                    onPressed: () async {
+                        //Image.file(File(widget.imgPath));
+                        print(File(widget.imgPath).readAsBytes().toString());
                     },
                   ),
                 ),
@@ -59,6 +58,7 @@ class _PreviewScreenState extends State<PreviewScreen>{
 
   Future<ByteData> getBytesFromFile() async{
     Uint8List bytes = File(widget.imgPath).readAsBytesSync() as Uint8List;
+    print(File(widget.imgPath).readAsBytes().asStream());
     return ByteData.view(bytes.buffer);
   }
 }
