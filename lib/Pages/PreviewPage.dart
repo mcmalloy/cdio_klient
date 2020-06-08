@@ -45,7 +45,8 @@ class _PreviewScreenState extends State<PreviewScreen>{
                     onPressed: () async {
                         //Image.file(File(widget.imgPath));
                       File image = File(widget.imgPath);
-                      dao.sendFile(image);
+                      //dao.sendFile(image);
+                      dao.sendRequest(widget.imgPath);
                     },
                   ),
                 ),

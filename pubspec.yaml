@@ -36,6 +36,8 @@ dependencies:
   dio: 3.0.9
   file_picker: ^1.2.0
   image_picker:
+  okhttp: 0.0.1
+  multipart_request: 0.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

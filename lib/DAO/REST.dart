@@ -5,8 +5,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:multipart_request/multipart_request.dart';
 
 String SERVER_URL = "";
 String LOCALHOST_URL = "http://192.168.0.24:8081";
@@ -36,5 +35,36 @@ class BackendDAO{
       print('Error');
       return false;
     }
+  }
+  void sendRequest(String imagePath) {
+    var request = MultipartRequest();
+
+    request.setUrl("https://192.168.1.98:8081/Image");
+    request.addFile("image", imagePath);
+
+    var response = request.send();
+
+    response.onError = () {
+      print("Error");
+    };
+
+    response.onComplete = (response) {
+      print(response);
+    };
+
+    response.progress.listen((int progress) {
+      print("progress from response object " + progress.toString());
+    });
+  }
+
+  void multipart(String imagePath) async {
+    var request = http.MultipartRequest('POST', Uri.parse(LOCALHOST_URL+'/Image'));
+    request.files.add(
+        await http.MultipartFile.fromPath(
+            'picture',
+            imagePath
+        )
+    );
+    var res = await request.send();
   }
 }
