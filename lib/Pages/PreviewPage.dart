@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'dart:async';
+import 'package:cdioklient/DAO/REST.dart';
 class PreviewScreen extends StatefulWidget{
   final String imgPath;
 
@@ -16,8 +17,7 @@ class PreviewScreen extends StatefulWidget{
 
 }
 class _PreviewScreenState extends State<PreviewScreen>{
-  File _image;
-
+  BackendDAO dao = new BackendDAO();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,8 @@ class _PreviewScreenState extends State<PreviewScreen>{
                       color: Colors.blue,
                     onPressed: () async {
                         //Image.file(File(widget.imgPath));
-                        print(File(widget.imgPath).readAsBytes().toString());
+                      File image = File(widget.imgPath);
+                      dao.sendFile(image);
                     },
                   ),
                 ),
