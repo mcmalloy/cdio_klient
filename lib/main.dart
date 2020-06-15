@@ -16,11 +16,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: 'home',
       routes: {
-        'home' : (context) => Home(),
+        'home' : (context) => SolitairePage(),
         'Game Screen' : (context) => SolitairePage(),
         'Camera Screen' : (context) => CameraScreen(),
         'Preview Screen' : (context) => PreviewScreen()

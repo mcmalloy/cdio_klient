@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:path/path.dart';
 import 'dart:async';
-import 'package:cdioklient/DAO/REST.dart';
+import 'package:cdioklient/DAO/imgurREST.dart';
 class PreviewScreen extends StatefulWidget{
   final String imgPath;
 
@@ -17,7 +15,7 @@ class PreviewScreen extends StatefulWidget{
 
 }
 class _PreviewScreenState extends State<PreviewScreen>{
-  BackendDAO dao = new BackendDAO();
+  imgurAPI dao = new imgurAPI();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,10 +41,9 @@ class _PreviewScreenState extends State<PreviewScreen>{
                       child: Text('Upload to Solitaire Logic'),
                       color: Colors.blue,
                     onPressed: () async {
-                        //Image.file(File(widget.imgPath));
-                      File image = File(widget.imgPath);
-                      //dao.sendFile(image);
-                      dao.sendRequest(widget.imgPath);
+                      if(dao.main(widget.imgPath)!=null){
+                        Navigator.pushNamed(context, 'home');
+                      }
                     },
                   ),
                 ),
@@ -58,9 +55,5 @@ class _PreviewScreenState extends State<PreviewScreen>{
     );
   }
 
-  Future<ByteData> getBytesFromFile() async{
-    Uint8List bytes = File(widget.imgPath).readAsBytesSync() as Uint8List;
-    print(File(widget.imgPath).readAsBytes().asStream());
-    return ByteData.view(bytes.buffer);
-  }
+
 }

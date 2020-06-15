@@ -1,3 +1,4 @@
+import 'package:cdioklient/DAO/imgurREST.dart';
 import 'package:flutter/material.dart';
 
 class SolitairePage extends StatefulWidget {
@@ -6,6 +7,8 @@ class SolitairePage extends StatefulWidget {
 }
 
 class _SolitairePageState extends State<SolitairePage> {
+  imgurAPI backend = new imgurAPI();
+  static String messages = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +17,13 @@ class _SolitairePageState extends State<SolitairePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 50,),
+            Container(
+              height: 20,
+              child: SingleChildScrollView(
+                child: Text(messages),
+              ),
+            ),
+            SizedBox(height: 25,),
             RaisedButton(
               onPressed: (){
                 Navigator.pushNamed(context, 'Camera Screen');
@@ -25,5 +35,9 @@ class _SolitairePageState extends State<SolitairePage> {
         ),
       )
     );
+  }
+  void updateMessages(){
+    messages += backend.getLastImageLink()+"\n";
+    print("messages: "+messages);
   }
 }
