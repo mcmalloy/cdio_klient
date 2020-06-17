@@ -42,7 +42,9 @@ class _PreviewScreenState extends State<PreviewScreen>{
                       color: Colors.blue,
                     onPressed: () async {
                       if(dao.main(widget.imgPath)!=null){
-                        Navigator.pushNamed(context, 'home');
+                          if(dao.getMessages()!=null){
+                            Navigator.pushNamed(context, 'home');
+                          }
                       }
                     },
                   ),

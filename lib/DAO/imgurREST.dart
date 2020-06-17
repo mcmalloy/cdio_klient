@@ -1,3 +1,4 @@
+import 'package:http/http.dart';
 import 'package:imgur/imgur.dart' as imgur;
 
 
@@ -7,8 +8,9 @@ class imgurAPI{
 
 final String accessToken = 'b33d6c7f46b12a18210f1462f044f79d955984cd';
 String _lastImageLink;
+static List<String> messages;
 
-    Future<String> main(String imgPath) async {
+    Future<List<String>> main(String imgPath) async {
     final client = imgur.Imgur(imgur.Authentication.fromToken(accessToken));
     String imageLink;
     /// Upload an image from path
@@ -22,15 +24,31 @@ String _lastImageLink;
     print('Uploaded image to: $imageLink');
     if(imageLink.isNotEmpty){
       _lastImageLink = imageLink;
-      return imageLink;
+      String response = await postRequest(_lastImageLink);
+      messages.add(response);
+      return messages;
     }
     else{
       return null;
     }
   }
 
+  Future<String> postRequest(String imgurURL) async {
+      final uri = 'http://192.168.0.24:8081/ImageURL';
+      print("Sending post to $uri?image_url="+imgurURL);
+      Response response = await post(
+        uri+'?image_url='+imgurURL,
+      );
+      print(response.body.toString());
+      return response.body.toString();
+  }
+
   String getLastImageLink(){
       return _lastImageLink;
+  }
+
+  Future<List<String>> getMessages() async{
+      return messages;
   }
 
 }
