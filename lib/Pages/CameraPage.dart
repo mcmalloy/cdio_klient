@@ -42,7 +42,7 @@ class _CameraScreenState extends State {
     if (controller != null) {
       await controller.dispose();
     }
-    controller = CameraController(cameraDescription, ResolutionPreset.high);
+    controller = CameraController(cameraDescription, ResolutionPreset.ultraHigh);
 
     controller.addListener(() {
       if (mounted) {
