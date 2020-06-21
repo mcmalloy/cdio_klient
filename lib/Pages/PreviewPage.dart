@@ -44,7 +44,6 @@ class _PreviewScreenState extends State<PreviewScreen>{
                       child: setUpButtonChild(),
                     onPressed: () async {
                       if(_state==0){
-                        _messageList = await dao.postImageToImgur(widget.imgPath);
                         animateButton();
                       }
                       else if(_state == 2){
@@ -93,7 +92,9 @@ class _PreviewScreenState extends State<PreviewScreen>{
       _state = 1;
     });
 
-    Timer(Duration(milliseconds: 3300), () {
+    Timer(Duration(milliseconds: 3300), () async {
+      // Her uploader vi imgur link til java, henter besked tilbage og samtidig viser en loading animation i 3300ms, som sikrer at vi får et objekt tilbage
+      _messageList = await dao.postImageToImgur(widget.imgPath);
       setState(() {
         _state = 2;
       });
