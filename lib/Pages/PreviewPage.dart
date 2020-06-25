@@ -8,14 +8,16 @@ import 'dart:async';
 import 'package:cdioklient/DAO/imgurREST.dart';
 class PreviewScreen extends StatefulWidget{
   final String imgPath;
-
-  PreviewScreen({this.imgPath});
-
+  bool isNewGame;
+  PreviewScreen({this.imgPath,this.isNewGame});
   @override
-  _PreviewScreenState createState() => _PreviewScreenState();
+  _PreviewScreenState createState() => _PreviewScreenState(isNewGame);
 
 }
 class _PreviewScreenState extends State<PreviewScreen>{
+  bool isNewGame;
+  _PreviewScreenState(this.isNewGame);
+
   List<String> _messageList;
   int _state = 0;
   imgurAPI dao = new imgurAPI();
@@ -50,7 +52,7 @@ class _PreviewScreenState extends State<PreviewScreen>{
                         if(_messageList.isNotEmpty){
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SolitairePage(_messageList)),);
+                            MaterialPageRoute(builder: (context) => SolitairePage(_messageList,isNewGame)),);
                         }
                         else{
                           print("Kunne ikke hente besked fra Java serveren");

@@ -1,21 +1,25 @@
 import 'package:cdioklient/DAO/imgurREST.dart';
 import 'package:flutter/material.dart';
 
+import 'CameraPage.dart';
+
 class SolitairePage extends StatefulWidget {
   List<String> lastMessage;
+  bool isNewGame;
+  SolitairePage(this.lastMessage, this.isNewGame);
 
-  SolitairePage(this.lastMessage);
 
   @override
-  _SolitairePageState createState() => _SolitairePageState(lastMessage);
+  _SolitairePageState createState() => _SolitairePageState(lastMessage,isNewGame);
 }
 
 class _SolitairePageState extends State<SolitairePage> {
+  bool isNewGame = false;
   imgurAPI backend = new imgurAPI();
   List<String> lastMessage;
   List<String> messages;
 
-  _SolitairePageState(this.lastMessage);
+  _SolitairePageState(this.lastMessage,this.isNewGame);
 
   @override
   void initState() {
@@ -42,11 +46,14 @@ class _SolitairePageState extends State<SolitairePage> {
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, 'Camera Screen');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context)=> CameraScreen())
+                  );
                 },
                 child: Text('Tag billede af spillet'),
                 color: Colors.blue,
-              )
+              ),
+              Text("Starting new game: $isNewGame")
             ],
           ),
         )

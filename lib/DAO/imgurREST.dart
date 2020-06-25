@@ -10,6 +10,14 @@ final String accessToken = 'b33d6c7f46b12a18210f1462f044f79d955984cd';
 String _lastImageLink;
 static List<String> messages = new List<String>();
 
+    Future<void> setGameStatus(bool isNewGame) async {
+      print('WACK');
+      final uri = 'http://192.168.1.46:8081/setNewGameStatus';
+      Response response = await post('http://192.168.1.46:8081/setNewGameStatus?status='+isNewGame.toString());
+
+  }
+
+
     Future<List<String>> postImageToImgur(String imgPath) async {
     final client = imgur.Imgur(imgur.Authentication.fromToken(accessToken));
     String imageLink;
@@ -34,7 +42,7 @@ static List<String> messages = new List<String>();
   }
 
   Future<String> postRequest(String imgurURL) async {
-      final uri = 'http://192.168.1.99:8081/ImageURL';
+      final uri = 'http://192.168.1.46:8081/ImageURL';
       print("Sending post to $uri?image_url="+imgurURL);
       Response response = await post(
         uri+'?image_url='+imgurURL,

@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: 'home',
       routes: {
-        'home' : (context) => SolitairePage(null),
-        'Game Screen' : (context) => SolitairePage(null),
+        'home' : (context) => Home(),
+        'Game Screen' : (context) => SolitairePage(null,null),
         'Camera Screen' : (context) => CameraScreen(),
         'Preview Screen' : (context) => PreviewScreen()
       },

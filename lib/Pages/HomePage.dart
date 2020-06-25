@@ -1,4 +1,8 @@
+import 'package:cdioklient/DAO/imgurREST.dart';
+import 'package:cdioklient/Pages/CameraPage.dart';
 import 'package:flutter/material.dart';
+
+import 'SolitairePage.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -6,6 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  imgurAPI api = new imgurAPI();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,15 +24,21 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Text('Du kan starte et nyt spil, eller fortsæt fra hvor du slap'),
             RaisedButton(
-              onPressed: (){
-                // TODO: GO TO CAMERA PAGE
-                Navigator.pushNamed(context, 'Game Screen');
+              onPressed: () {
+                api.setGameStatus(true);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=> SolitairePage(null,true)));
+                //Navigator.pushNamed(context, 'Game Screen');
               },
               child: Text('Nyt Spil'),
               color: Colors.blue,
             ),
             RaisedButton(
-              onPressed: (){
+              onPressed: () {
+                api.setGameStatus(false);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=> SolitairePage(null,false))
+                );
                 // Continue game
               },
               child: Text('Fortsæt Spil'),
