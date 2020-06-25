@@ -46,6 +46,7 @@ class _PreviewScreenState extends State<PreviewScreen>{
                       child: setUpButtonChild(),
                     onPressed: () async {
                       if(_state==0){
+                        print("SENDING");
                         animateButton();
                       }
                       else if(_state == 2){

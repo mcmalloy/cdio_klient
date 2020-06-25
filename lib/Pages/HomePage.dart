@@ -25,7 +25,6 @@ class _HomeState extends State<Home> {
             Text('Du kan starte et nyt spil, eller fortsæt fra hvor du slap'),
             RaisedButton(
               onPressed: () {
-                api.setGameStatus(true);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context)=> SolitairePage(null,true)));
                 //Navigator.pushNamed(context, 'Game Screen');
@@ -35,7 +34,6 @@ class _HomeState extends State<Home> {
             ),
             RaisedButton(
               onPressed: () {
-                api.setGameStatus(false);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context)=> SolitairePage(null,false))
                 );

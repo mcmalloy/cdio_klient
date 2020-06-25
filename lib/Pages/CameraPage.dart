@@ -9,6 +9,8 @@ import 'dart:core';
 import 'PreviewPage.dart';
 import 'package:path/path.dart';
 
+// CREDIT GOES TO https://www.raywenderlich.com/4333657-using-the-camera-on-flutter with their tutorial on how to save pictures taken with camera in flutter
+
 class CameraScreen extends StatefulWidget {
   @override
   _CameraScreenState createState() => _CameraScreenState();
